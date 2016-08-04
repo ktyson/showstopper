@@ -1,7 +1,7 @@
 <html>
 <head>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+<script src="jquery.min_1_10_2.js"></script>
 
 <script src="jquery-draggable-min.js" ></script>
 <!--     
@@ -77,7 +77,7 @@
                     charStr = charStr +  "&#x" + arrNums[i];
                     
                 }
-                
+ console.log("str",charStr);               
                 var actor = {};
                 actor.chars = charStr;
                 var id = "actor_" + Math.floor(Math.random() * 10000);
@@ -122,7 +122,7 @@
     
     
     
-
+//NOTE: must set the font!!
     
     
     
@@ -132,8 +132,15 @@
 
 <style>
 
+
+
+    @font-face {
+    	font-family: 'Africa';
+    	src: local('Africa.ttf');
+    }
+    
     .actors {
-        
+         font-family: 'Africa';
         position: absolute;  
         cursor: pointer;
     }
