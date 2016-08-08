@@ -1,0 +1,136 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="countryList.js"></script>
+<script src="jquery.min_1_10_2.js"></script>
+<script>
+
+var currCtry;
+
+function ready() {
+
+    makeQuiz();
+    
+    $(".guess").on("click", function() {
+        var charName = $(this).attr("id");
+
+        if(charName == currCtry) {
+
+            alert("You are CORRECT");
+            ready();
+            
+        } else {
+            
+            alert("WRONG! Try again");
+            $("#"+charName).remove();
+        }
+    })
+
+}
+
+function makeQuiz() {
+    
+    $("body").empty();
+
+    var i = Math.floor(Math.random()*countries.length);   
+
+    //set global blech
+    currCtry = countries[i].charName;
+        
+    drawCountry(countries[i].ucode); 
+
+
+    var arrRandomCtryNames = [i];
+    for (var j=0; j<4; j++) {
+        var newIndex = Math.floor(Math.random() * countries.length);
+        if ($.inArray(newIndex, arrRandomCtryNames) == -1) {
+            arrRandomCtryNames.push(newIndex);
+        }
+    }
+    shuffle(arrRandomCtryNames);
+
+    var topCtr = 20;
+    var leftCtr = 20;
+    for (var k = 0; k < arrRandomCtryNames.length; k++) {
+        drawGuess(countries[arrRandomCtryNames[k]].name, 
+            countries[arrRandomCtryNames[k]].charName, topCtr, leftCtr);
+        topCtr = topCtr + 40;
+        leftCtr = leftCtr + 40;
+    } 
+       
+}
+
+function drawCountry(ucode) {
+
+    var c = [];
+    charStr = "&#x" + ucode;
+
+    c.push("<div class='country'>" + charStr + "</div>");      
+    $("body").append(c.join('')); 
+
+}
+
+function drawGuess(ctryName, charName, top, left) {
+
+    var c = [];
+
+    c.push("<div id='" + charName + "' class='guess'>" + ctryName + "</div>");      
+    $("body").append(c.join('')); 
+    
+    $("#"+charName).css("top",top);
+    $("#"+charName).css("left",left);
+
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+
+</script>
+
+
+<style>
+
+
+
+    @font-face {
+    	font-family: 'Africa';
+    	src:url('Africa.ttf') format('truetype');
+    }
+    
+    .country {
+        font-family: 'Africa';
+        font-size: 400px;
+    }
+
+    .guess {
+        position: absolute;
+        font-family: 'Arial';
+        font-size: 12px;
+        font-weight: bold;
+        color: red;
+        border: solid red 2px;
+        cursor: pointer;
+    }    
+    
+</style>
+</head>
+<body onLoad="ready();">
+</body>
+</html>

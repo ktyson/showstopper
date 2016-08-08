@@ -1,9 +1,9 @@
 <html>
 <head>
 
-<script src="jquery.min_1_10_2.js"></script>
+<script src="../jslib/jquery.min_1_10_2.js"></script>
 
-<script src="jquery-draggable-min.js" ></script>
+<script src="../jslib/jquery-draggable-min.js" ></script>
 <!--     
   Reference the theme's stylesheet on the Google CDN
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/start/jquery-ui.css" type="text/css" rel="Stylesheet" />
@@ -126,7 +126,7 @@
     
     
     
-    
+//    	xxsrc: local('Africa.ttf');    
     
 </script>
 
@@ -136,11 +136,11 @@
 
     @font-face {
     	font-family: 'Africa';
-    	src: local('Africa.ttf');
+    	src:url('Africa.ttf') format('truetype');
     }
     
     .actors {
-         font-family: 'Africa';
+        font-family: 'Africa';
         position: absolute;  
         cursor: pointer;
     }
